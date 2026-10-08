@@ -57,6 +57,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_DEV }}
           script: |
+            set -euo pipefail
             cd ~/Inbuildify-Server-ECR
 
             aws ecr get-login-password --region ap-south-1 | \

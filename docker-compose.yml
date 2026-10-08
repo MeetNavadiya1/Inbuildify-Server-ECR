@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: ://amazonaws.com
+    image: ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
     container_name: dev-inbuildify-app
     restart: unless-stopped
     ports:
@@ -13,7 +13,7 @@ services:
       - app-network
 
   worker:
-    image: ://amazonaws.com
+    image: ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
     container_name: dev-inbuildify-worker
     restart: unless-stopped
     command: npm run start:worker
@@ -23,7 +23,7 @@ services:
       - app-network
 
   socket:
-    image: ://amazonaws.com
+    image: ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
     container_name: dev-inbuildify-socket
     restart: unless-stopped
     command: npm run start:socket
