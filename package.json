@@ -12,6 +12,7 @@
     "dev:socket": "nodemon socket.js",
     "start": "node  server.js",
     "start:socket": "node socket.js",
+    "start:worker": "node worker.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "seed:all": "node src/seeder/seedAll.js",
