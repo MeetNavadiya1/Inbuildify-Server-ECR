@@ -1,0 +1,1 @@
+Server deployment using github actions and ecr on ec2
