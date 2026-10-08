@@ -1,0 +1,97 @@
+import { Model, DataTypes } from "sequelize";
+
+export class BuildingContract extends Model {
+  static associate(models) {
+    BuildingContract.belongsTo(models.Job, { foreignKey: "job_id", as: "job", onDelete: "CASCADE" });
+    BuildingContract.belongsTo(models.Builder, { foreignKey: "builder_id", as: "builder", onDelete: "SET NULL" });
+    BuildingContract.belongsTo(models.Company, { foreignKey: "company_id", as: "company", onDelete: "SET NULL" });
+    BuildingContract.belongsTo(models.DriveFile, { foreignKey: "pdf_file_id", as: "pdfFile", onDelete: "SET NULL" });
+  }
+}
+
+export default (sequelize) => {
+  BuildingContract.init(
+    {
+      building_contract_id: { type: DataTypes.UUID, defaultValue: sequelize.literal("gen_random_uuid()"), primaryKey: true },
+      job_id: { type: DataTypes.UUID, allowNull: false },
+      builder_id: { type: DataTypes.UUID, allowNull: true },
+      company_id: { type: DataTypes.UUID, allowNull: true },
+      pdf_file_id: { type: DataTypes.UUID, allowNull: true },
+      home_telephone: { type: DataTypes.STRING(50), allowNull: true },
+      business_telephone: { type: DataTypes.STRING(50), allowNull: true },
+      actual_building_period: { type: DataTypes.INTEGER, allowNull: true },
+      delay_weather: { type: DataTypes.INTEGER, allowNull: true },
+      delay_breaks: { type: DataTypes.INTEGER, allowNull: true },
+      delay_nature: { type: DataTypes.INTEGER, allowNull: true },
+      total_building_period: { type: DataTypes.INTEGER, allowNull: true },
+      garage_size: { type: DataTypes.STRING(20), allowNull: true },
+      spec_pages_count: { type: DataTypes.INTEGER, allowNull: true },
+      number_of_pages_of_plans: { type: DataTypes.INTEGER, allowNull: true },
+      paying_planning_approval: { type: DataTypes.STRING(100), allowNull: true },
+      planning_approval_days: { type: DataTypes.INTEGER, allowNull: true },
+      paying_builder_permit: { type: DataTypes.STRING(100), allowNull: true },
+      builder_permit_days: { type: DataTypes.INTEGER, allowNull: true },
+      contract_ended_percent: { type: DataTypes.DECIMAL(5, 2), allowNull: true },
+      progress_payment_days: { type: DataTypes.INTEGER, allowNull: true },
+      late_interest: { type: DataTypes.STRING(100), allowNull: true },
+      late_completion: { type: DataTypes.STRING(100), allowNull: true },
+      extra_work_percent: { type: DataTypes.DECIMAL(5, 2), allowNull: true },
+      delay_damage: { type: DataTypes.STRING(100), allowNull: true },
+      bedroom: { type: DataTypes.INTEGER, allowNull: true },
+      lending_body: { type: DataTypes.STRING(200), allowNull: true },
+      lending_address: { type: DataTypes.STRING(300), allowNull: true },
+      lending_finance_amount: { type: DataTypes.STRING(50), allowNull: true },
+      lending_approval_days: { type: DataTypes.INTEGER, allowNull: true },
+      insurer: { type: DataTypes.STRING(200), allowNull: true },
+      insurer_address1: { type: DataTypes.STRING(300), allowNull: true },
+      insurer_address2: { type: DataTypes.STRING(300), allowNull: true },
+      insurer_state: { type: DataTypes.STRING(100), allowNull: true },
+      postcode: { type: DataTypes.STRING(20), allowNull: true },
+      phone: { type: DataTypes.STRING(50), allowNull: true },
+      name_of_insured: { type: DataTypes.STRING(200), allowNull: true },
+      company_name: { type: DataTypes.STRING(200), allowNull: true },
+      abn: { type: DataTypes.STRING(50), allowNull: true },
+      surveyor_name: { type: DataTypes.STRING(200), allowNull: true },
+      site_address: { type: DataTypes.TEXT, allowNull: true },
+      volume_number: { type: DataTypes.STRING(100), allowNull: true },
+      folio_number: { type: DataTypes.STRING(100), allowNull: true },
+      plan_of_subdivision_number: { type: DataTypes.STRING(200), allowNull: true },
+      covenants_restrictions_easements: { type: DataTypes.TEXT, allowNull: true },
+      price_excluding_gst: { type: DataTypes.STRING(50), allowNull: true },
+      gst_on_the_price: { type: DataTypes.STRING(50), allowNull: true },
+      contract_price_including_gst: { type: DataTypes.STRING(50), allowNull: true },
+      months_price_fixed: { type: DataTypes.INTEGER, allowNull: true },
+      deposit_due: { type: DataTypes.STRING(50), allowNull: true },
+      deposit_paid: { type: DataTypes.STRING(50), allowNull: true },
+      progress_method: { type: DataTypes.STRING(20), allowNull: true },
+      progress_payment_stages: { type: DataTypes.JSONB, allowNull: true },
+      purchaser1_full_name: { type: DataTypes.STRING(200), allowNull: true },
+      purchaser2_full_name: { type: DataTypes.STRING(200), allowNull: true },
+      purchaser_witness_full_name: { type: DataTypes.STRING(200), allowNull: true },
+      purchaser_witness_email: { type: DataTypes.STRING(200), allowNull: true },
+      purchaser_witness_address: { type: DataTypes.TEXT, allowNull: true },
+      purchaser_witness_signature: { type: DataTypes.TEXT, allowNull: true },
+      builder_witness_same: { type: DataTypes.BOOLEAN, defaultValue: false },
+      builder_witness_full_name: { type: DataTypes.STRING(200), allowNull: true },
+      builder_witness_email: { type: DataTypes.STRING(200), allowNull: true },
+      builder_witness_address: { type: DataTypes.TEXT, allowNull: true },
+      builder_witness_signature: { type: DataTypes.TEXT, allowNull: true },
+      guarantor_signature: { type: DataTypes.BOOLEAN, defaultValue: false },
+      guarantor_full_name: { type: DataTypes.STRING(200), allowNull: true },
+      guarantor_signature_image: { type: DataTypes.TEXT, allowNull: true },
+      contract_signed_date: { type: DataTypes.DATEONLY, allowNull: true },
+      contract_expiry_date: { type: DataTypes.DATEONLY, allowNull: true },
+      special_conditions: { type: DataTypes.JSONB, allowNull: true },
+      checklist_answers: { type: DataTypes.JSONB, allowNull: true },
+      createdAt: { type: DataTypes.DATE },
+      updatedAt: { type: DataTypes.DATE },
+    },
+    {
+      sequelize,
+      tableName: "building_contracts",
+      modelName: "BuildingContract",
+      underscored: true,
+    },
+  );
+  return BuildingContract;
+};

@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  app:
+    image: ://amazonaws.com
+    container_name: dev-inbuildify-app
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+  worker:
+    image: ://amazonaws.com
+    container_name: dev-inbuildify-worker
+    restart: unless-stopped
+    command: npm run start:worker
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+  socket:
+    image: ://amazonaws.com
+    container_name: dev-inbuildify-socket
+    restart: unless-stopped
+    command: npm run start:socket
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
